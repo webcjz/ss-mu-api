@@ -26,7 +26,7 @@ class Welcome extends CI_Controller {
 
     public function index()
     {
-        $base_url = $this->config->item(base_url');
+        $base_url = $this->config->item(base_url);
         header("Location: {$base_url}api");
     }
 }

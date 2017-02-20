@@ -8,17 +8,17 @@
 class Users extends Auth_Controller
 {
 
-    public function __construct()
-    {
-        //往auth_controller里面传Token
+        public function __construct()
+        {
+                //往auth_controller里面传Token
+            parent::__construct(empty($_GET["token"])?null:$_GET["token"]);
+            $this->load->model('User_Model');
 
-        parent::__construct($_GET["token"]);
-    }
+        }
 
+        public function getUsers()
+        {
 
-    public function getUsers()
-    {
-        $this->load->model('User_Model');
 
         $row = $this->User_Model->getRowsUser();
         if (!empty($row)) {
@@ -26,20 +26,101 @@ class Users extends Auth_Controller
                 ->set_content_type('application/json')
                 ->set_output(json_encode($row));
         }
-
-    }
-        public function getUser($id)
-    {
-        $this->load->model('User_Model');
-        $row=$this->User_Model->getRowUser($id);
-        if (!empty($row)) {
-            $this->output
-                ->set_content_type('application/json')
-                ->set_output(json_encode($row));
         }
 
-    }
+        public function getUser($id)
+        {
 
+            $row = $this->User_Model->getRowUser($id);
+            if (!empty($row)) {
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode($row));
+            }
+        }
+
+        //用于更新一些用户
+        /*public function postUsers($id_arr)
+        {
+            $row=load->model('User_Model');
+
+
+        }*/
+
+
+        public function addUser()
+        {
+            $row=$this->User_Model->addRowUser($arr);
+
+
+            if (empty($row))
+            {
+                echo'更新失败';
+            }
+            else{
+                echo'更新成功';
+            }
+
+
+       }
+
+        public function delUser($id)
+        {
+
+            $row=$this->User_Model->delRowUser($id);
+            echo '影响'.$row.'行';
+
+
+        }
+
+
+
+        public function postUser()
+        {
+
+/*            $arr=array(
+                'passwd'=>$passwd,
+                't'=>$t,
+                'u'=>$u,
+                'd'=>$d,
+                'transfer_enable'=>$transfer_enable,
+                'port'=>$port,
+                'switch'=>$switch,
+                'enable'=>$enable,
+                'method'=>$method
+            );*/
+
+
+            //把零散的数据合成一个数组提交上去，而且判断每项是否为空
+
+            isset($_POST['passwd'])?$arr['passwd']=$_POST['passwd']:'';
+
+
+            isset($_POST['t'])?$arr['t']=$_POST['t']:'';
+
+
+
+            isset($_POST['u'])?$arr['u']=$_POST['u']:'';
+
+            isset($_POST['d'])?$arr['d']=$_POST['d']:'';
+
+            isset($_POST['transfer_enable'])?$arr['transfer_enable']=$_POST['transfer_enable']:'';
+
+            isset($_POST['port'])?$arr['port']=$_POST['port']:'';
+
+            isset($_POST['switch'])?$arr['switch']=$_POST['switch']:'';
+
+            isset($_POST['enable'])?$arr['enable']=$_POST['enable']:'';
+
+            isset($_POST['method'])?$arr['method']=$_POST['method']:'';
+
+            if(isset($_POST['id'])) {
+
+                $this->User_Model->updateRowUser($_POST['id'], $arr);
+            }
+
+
+        }
 
 
 }

@@ -17,7 +17,7 @@ Class Auth_Controller extends MY_Controller
         $this->load->model('Auth_Model');
         $row = $this->Auth_Model->checkToken($token);
         if (empty($row)) {
-            echo '登录失败';
+            echo 'Token Fail';
             exit;
 
         }
