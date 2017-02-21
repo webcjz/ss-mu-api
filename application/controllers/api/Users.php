@@ -50,25 +50,16 @@ class Users extends Auth_Controller
 
         public function addUser()
         {
-            $row=$this->User_Model->addRowUser($arr);
 
-
-            if (empty($row))
-            {
-                echo'更新失败';
-            }
-            else{
-                echo'更新成功';
-            }
-
+             $this->postUser();
 
        }
 
         public function delUser($id)
         {
 
-            $row=$this->User_Model->delRowUser($id);
-            echo '影响'.$row.'行';
+            echo $this->User_Model->delRowUser($id);
+
 
 
         }
@@ -90,15 +81,11 @@ class Users extends Auth_Controller
                 'method'=>$method
             );*/
 
-
             //把零散的数据合成一个数组提交上去，而且判断每项是否为空
 
             isset($_POST['passwd'])?$arr['passwd']=$_POST['passwd']:'';
 
-
             isset($_POST['t'])?$arr['t']=$_POST['t']:'';
-
-
 
             isset($_POST['u'])?$arr['u']=$_POST['u']:'';
 
@@ -116,7 +103,10 @@ class Users extends Auth_Controller
 
             if(isset($_POST['id'])) {
 
-                $this->User_Model->updateRowUser($_POST['id'], $arr);
+                echo $this->User_Model->updateRowUser($_POST['id'], $arr);
+            }
+            else{
+                echo 'Post Fail';
             }
 
 

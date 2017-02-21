@@ -28,6 +28,23 @@ class Test extends CI_Controller
         }
         fclose($fp);
 
+    }
+
+
+    public function testzz(){
+
+        $a=12;
+        $b=21;
+        $c=11;
+
+
+        $a,$b,$c;
+
+        $d=$a>$b? $a:$b;
+
+        
+
+
 
 
 
