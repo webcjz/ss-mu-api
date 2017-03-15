@@ -31,4 +31,8 @@ include APPPATH . 'core/App_Controller.php';
 //web 公用控制器
 include APPPATH . 'core/Web_Controller.php';*/
 
-include APPPATH . 'core/Auth_Controller.php';
+include APPPATH . 'core/Api_Auth_Controller.php';
+
+include APPPATH . 'core/Web_Auth_Controller.php';
+
+

@@ -81,26 +81,6 @@ class User_Model extends CI_Model
 
     }
 
-
-
-
-
-
-
-//test 并发
-    public function getNum($uid)
-    {
-        $this->db->where('uid',$uid);
-        $this->db->from('test');
-        $query=$this->db->get()->row();
-        return $query;
-    }
-    public function updateNum()
-    {
-
-        $this->db->set('num','num -1',false);
-        $this->db->update('test');
-    }
 }
 
 
